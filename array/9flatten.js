@@ -11,8 +11,8 @@ const flatten=(arr)=>{
   let flatArr=[];
   arr.forEach((item)=>{
     if(Array.isArray(item)){
-      let arr1=[...item];
-      flatArr=[...flatArr,...arr1];
+
+      flatArr=[...flatArr,...item];
     } else {
       flatArr.push(item);
     }
