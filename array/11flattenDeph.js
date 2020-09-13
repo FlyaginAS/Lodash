@@ -1,13 +1,20 @@
 /*
-*Recursively flattens array.
+*Recursively flatten array up to depth times.
 *
 *
-* _.flattenDeep([1, [2, [3, [4]], 5]]);
-// => [1, 2, 3, 4, 5]
+* var array = [1, [2, [3, [4]], 5]];
+
+_.flattenDepth(array, 1);
+// => [1, 2, [3, [4]], 5]
+
+_.flattenDepth(array, 2);
+// => [1, 2, 3, [4], 5]
 * */
 
-const flattenDeep=(arr)=>{
+const flattenDeep=(arr, deph)=>{
   let flatArr=[];
+  deph--;
+
   arr.forEach((item)=>{
     if(Array.isArray(item)){
       flatArr=[...flatArr,...item];
@@ -23,13 +30,14 @@ const flattenDeep=(arr)=>{
       elseArr=true;
     }
   }
-  if(!elseArr){
+  if(!elseArr || deph===0 ){
     return flatArr;
-  } else{
+  } else {
     //если нет- возвращаем массив.
-    return flattenDeep(flatArr);
+    return flattenDeep(flatArr,deph);
   }
 
 };
 
-console.log(flattenDeep([1, [2, [3, [4]], 5]]));
+console.log(flattenDeep([1, [2, [3, [4]], 5]],1));
+console.log(flattenDeep([1, [2, [3, [4]], 5]],2));
